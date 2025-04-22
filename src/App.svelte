@@ -4,7 +4,9 @@
   import ThankYou from './pages/ThankYou.svelte';
   import Followers from './pages/Followers.svelte';
   import SignIn from './pages/SignIn.svelte';
-
+  import Buses from './pages/Buses.svelte';
+  import Orphanages from './pages/Orphanages.svelte';
+  import AddChildren from './pages/AddChildren.svelte';
   import { onMount } from 'svelte';
 
   onMount(() => {
@@ -21,5 +23,8 @@
   <Route path="/thankyou" component={ThankYou} />
   <Route path="/followers" component={Followers} />
   <Route path="/signin" component={SignIn} />
+  <Route path="/buses" component={Buses} />
+  <Route path="/orphanages" component={Orphanages} />
+  <Route path="/addchildren" component={AddChildren} />
   <!-- <Route path="/about" component={About} /> -->
 </Router>

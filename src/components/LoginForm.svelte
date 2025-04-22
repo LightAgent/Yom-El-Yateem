@@ -1,5 +1,5 @@
 <script>
-  import { db, doc, addDoc,collection } from "../lib/firebase"; // import Firestore functions
+  import { db,addDoc,collection } from "../lib/firebase"; // import Firestore functions
   import { navigate,link } from 'svelte-routing';
 
   let name = "";
@@ -56,6 +56,7 @@
         email,
         phone: fullPhone,
         collegeId,
+        children: []
       });
       navigate("/thankyou")
       console.log("Document written with ID: ", collegeId);
@@ -217,7 +218,6 @@
     Your participation makes Orphan's Day truly special. Together, we are
     creating a brighter future.
   </p>
-  <a use:link href="/followers">MEOW</a>
 </section>
 
 <style>
