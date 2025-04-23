@@ -10,6 +10,7 @@
 
   let phoneError = "";
   let collegeIdError = "";
+  let volunteerCode = "";
 
   const prefixes = ["010", "011", "012", "015"];
 
@@ -25,9 +26,9 @@
   }
 
   function validateCollegeId() {
-    const regex = /^\d{4,6}$/;
+    const regex = /^\d{4,8}$/;
     if (!regex.test(collegeId)) {
-      collegeIdError = "College ID must be 4 to 6 digits.";
+      collegeIdError = "College ID must be 4 to 8 digits.";
       return false;
     }
     collegeIdError = "";
@@ -39,6 +40,7 @@
     const validId = validateCollegeId();
 
     if (!validPhone || !validId) return;
+    if (volunteerCode.trim().length == 0) return;
 
     const fullPhone = phonePrefix + phoneSuffix;
 
@@ -56,8 +58,10 @@
         email,
         phone: fullPhone,
         collegeId,
+        volunteerCode,
         children: []
       });
+
       navigate("/thankyou")
       console.log("Document written with ID: ", collegeId);
     } catch (e) {
@@ -107,7 +111,7 @@
             class="input"
             type="text"
             bind:value={name}
-            placeholder="John Doe"
+            placeholder="ex: Nour Ahmed"
             required
             style="border-radius: 20px; padding: 15px; border: 1px solid #ff8f66; font-size: 1rem; background-color: #fff0e1; color: #000;"
           />
@@ -195,7 +199,20 @@
           <p class="help is-danger">{collegeIdError}</p>
         {/if}
       </div>
-
+      <div class="field">
+        <!-- svelte-ignore a11y-label-has-associated-control -->
+        <label class="label" style="color: #000; font-size: 1.2rem;">Volunteer Code</label>
+        <div class="control">
+          <input
+            required
+            class="input"
+            type="text"
+            bind:value={volunteerCode}
+            style="border-radius: 20px; padding: 15px; border: 1px solid #ff8f66; font-size: 1rem; background-color: #fff0e1; color: #000;"
+          />
+        </div>
+      </div>
+      
       <div class="field is-grouped is-grouped-centered mt-5">
         <div class="control">
           <button

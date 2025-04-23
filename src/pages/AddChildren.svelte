@@ -78,6 +78,7 @@
       {:else}
         <!-- Orphanage Selector -->
         <div class="field">
+          <!-- svelte-ignore a11y-label-has-associated-control -->
           <label class="label">اختار الدار</label>
           <div class="control">
             <div class="select">
@@ -94,6 +95,7 @@
         <!-- Bus Selector -->
         {#if selectedOrphanageId}
           <div class="field">
+            <!-- svelte-ignore a11y-label-has-associated-control -->
             <label class="label">Select Bus</label>
             <div class="control">
               <div class="select">
@@ -138,6 +140,7 @@
     <!-- Modal -->
     {#if showModal}
       <div class="modal is-active" transition:fly={{ y: 200, duration: 300 }}>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="modal-background" on:click={() => showModal = false}></div>
         <div class="modal-card">
           <header class="modal-card-head">
@@ -146,6 +149,7 @@
           </header>
           <section class="modal-card-body">
             <div class="field">
+              <!-- svelte-ignore a11y-label-has-associated-control -->
               <label class="label">الاسم</label>
               <div class="control">
                 <input class="input" bind:value={childName} placeholder="Enter name" />
@@ -153,8 +157,8 @@
             </div>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success" on:click={addChild}>Save</button>
-            <button class="button" on:click={() => showModal = false}>Cancel</button>
+            <button class="button is-success" on:click={addChild}>حفظ</button>
+            <button class="button" on:click={() => showModal = false}>إلغاء</button>
           </footer>
         </div>
       </div>

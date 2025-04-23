@@ -3,7 +3,8 @@
     import { navigate } from 'svelte-routing';
     import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { db, collection, getDocs } from "../lib/firebase";
-  
+    import Navbar from "../components/Navbar.svelte";
+
     let buses = [];
     let loading = true;
     if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
@@ -30,7 +31,7 @@
       return () => unsubscribe();
     });
   </script>
-  
+  <Navbar />
   <section
     class="section"
     style="background: linear-gradient(135deg, #fbe4d5, #f6b0d0); padding: 50px 0;"

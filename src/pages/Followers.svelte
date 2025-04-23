@@ -3,6 +3,7 @@
   import { navigate } from 'svelte-routing';
   import { getAuth, onAuthStateChanged } from "firebase/auth";
   import { db, collection, getDocs } from "../lib/firebase";
+  import Navbar from "../components/Navbar.svelte";
 
   let followers = [];
   let loading = true;
@@ -28,6 +29,7 @@
   });
 </script>
 
+<Navbar />
 <section
   class="section"
   style="background: linear-gradient(135deg, #fbe4d5, #f6b0d0); padding: 50px 0;"
@@ -53,6 +55,7 @@
               <th>رقم الهاتف</th>
               <th>البريد الإلكتروني</th>
               <th>الرقم الجامعي</th>
+              <th>Volunteer Code</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +65,7 @@
                 <td>{f.phone}</td>
                 <td>{f.email}</td>
                 <td>{f.collegeId}</td>
+                <td>{f.volunteerCode}</td>
               </tr>
             {/each}
           </tbody>

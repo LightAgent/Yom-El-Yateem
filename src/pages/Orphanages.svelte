@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { navigate } from "svelte-routing";
+    import Navbar from "../components/Navbar.svelte";
     import {
       getAuth,
       onAuthStateChanged
@@ -92,7 +93,7 @@
       }
     }
   </script>
-  
+  <Navbar />
   <section
     class="section"
     style="background: linear-gradient(135deg, #fbe4d5, #f6b0d0); padding: 50px 0;"
