@@ -218,6 +218,10 @@
               <strong>Follower College ID:</strong>
               {followers.find((f) => f.id === child.assigned)?.collegeId || "?"}
             </p>
+            <p>
+              <strong>Follower Phone Number:</strong>
+              {followers.find((f) => f.id === child.assigned)?.phone || "?"}
+            </p>
             <button
               class="button is-danger is-small"
               on:click={() => deassignChild(child)}

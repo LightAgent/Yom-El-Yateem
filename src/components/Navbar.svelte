@@ -59,7 +59,6 @@
           <a class="button is-primary" use:link href="/">
             <strong>Follower Sign Up</strong>
           </a>
-          <a class="button is-light" use:link href="/signin">Log in</a>
         </div>
       </div>
     </div>

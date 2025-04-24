@@ -19,7 +19,23 @@
 		}
 		:root {
     color-scheme: light;
-}
+	}
+	/* Apply text color to odd rows */
+	table tbody tr:nth-child(odd) td {
+	color: #000; /* Set text color for odd rows */
+	background-color: #f9f9f9; /* Set a constant background color for odd rows */
+	}
+
+	/* Change text color to white on hover for odd rows */
+	table tbody tr:nth-child(odd):hover td {
+	color: #000; /* Change text color to white on hover */
+	}
+
+	/* Optional: If you want to keep the background constant and not change on hover */
+	table tbody tr:nth-child(odd):hover {
+	background-color: #000; /* Maintain the same background color on hover */
+	}
+
 	</style>
 	<script defer src='/build/bundle.js'></script>
 </head>
