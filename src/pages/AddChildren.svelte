@@ -14,6 +14,7 @@
     getDoc,
     setDoc,
     updateDoc,
+    arrayUnion,
   } from "../lib/firebase";
   import { fly } from "svelte/transition";
   import { navigate } from "svelte-routing";
@@ -68,6 +69,13 @@
     // Cleanup
   }
 
+  $: if (selectedOrphanageId) {
+    const isValidBus = buses.some(
+      (b) => b.id === selectedBusId && b.orphanageId === selectedOrphanageId
+    );
+    if (!isValidBus) selectedBusId = "";
+  }
+
   // Function to get and increment the childId from the counters collection
   async function getNextChildId() {
     const counterDoc = doc(db, "counters", "childIdCounter");
@@ -89,18 +97,29 @@
   }
 
   const addChild = async () => {
-    if (!childName) return;
+    if (!childName || !selectedBusId || !selectedOrphanageId) return;
+
     try {
       const childId = await getNextChildId(); // Get the next sequential childId
-      await addDoc(collection(db, "children"), {
+
+      // 1. Add the child to the 'children' collection
+      const childRef = await addDoc(collection(db, "children"), {
         name: childName,
         orphanageId: selectedOrphanageId,
         busId: selectedBusId,
         giftGiven,
         assigned: false,
-        timestamp: serverTimestamp(), // Add timestamp
-        childId, // Add sequential childId
+        timestamp: serverTimestamp(),
+        childId,
       });
+
+      // 2. Add child ID to the 'children' array in the corresponding bus document
+      const busRef = doc(db, "buses", selectedBusId);
+      await updateDoc(busRef, {
+        children: arrayUnion(childRef.id),
+      });
+
+      // 3. Reset modal state
       childName = "";
       giftGiven = false;
       showModal = false;
@@ -178,15 +197,16 @@
   </div>
 
   <!-- FAB -->
-  {#if selectedBusId && selectedOrphanageId}
+  {#if selectedBusId && selectedOrphanageId && buses.find((b) => b.id === selectedBusId)?.orphanageId === selectedOrphanageId}
     <button
       class="fab"
       on:click={() => (showModal = true)}
       aria-label="Add child"
-      ><span class="icon is-small">
-        <i class="fas fa-plus"></i>
-      </span></button
     >
+      <span class="icon is-small">
+        <i class="fas fa-plus"></i>
+      </span>
+    </button>
   {/if}
 
   <!-- Modal -->
